@@ -1,4 +1,4 @@
-# sqlConnectionPool 一个简单的数据库连接池
+# sqlConnectionPool 基于C++11实现一个简单的数据库连接池
 ### 主要功能与其实现函数如下
 1. ConnectionPool* ConnectionPool::getConnectionPool() <br>
 连接池只需要一个实例，所以ConnectionPool以单例模式进行设计 <br>
