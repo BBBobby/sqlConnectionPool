@@ -8,38 +8,38 @@
 
 class ConnectionPool {
 public:
-	// Á¬½Ó³ØÖ»ĞèÒªÒ»¸öÊµÀı£¬ËùÒÔConnectionPoolÒÔµ¥ÀıÄ£Ê½½øĞĞÉè¼Æ
+	// è¿æ¥æ± åªéœ€è¦ä¸€ä¸ªå®ä¾‹ï¼Œæ‰€ä»¥ConnectionPoolä»¥å•ä¾‹æ¨¡å¼è¿›è¡Œè®¾è®¡
 	static ConnectionPool* getConnectionPool();
 	~ConnectionPool();
-	// ÓÃ»§»ñÈ¡Á¬½Ó
+	// ç”¨æˆ·è·å–è¿æ¥
 	std::shared_ptr<Connection> getConection();
 
 private:
-	// µ¥ÀıÄ£Ê½£¬Ë½ÓĞ¹¹Ôìº¯Êı
+	// å•ä¾‹æ¨¡å¼ï¼Œç§æœ‰æ„é€ å‡½æ•°
 	ConnectionPool();
-	// ¼ÓÔØÅäÖÃÎÄ¼ş
+	// åŠ è½½é…ç½®æ–‡ä»¶
 	bool loadConfigFile();
-	// µ±Á¬½Ó²»¹»ÓÃÊ±£¬´´½¨ĞÂµÄÁ¬½Ó
+	// å½“è¿æ¥ä¸å¤Ÿç”¨æ—¶ï¼Œåˆ›å»ºæ–°çš„è¿æ¥
 	void produceMoreConnection();
-	// É¾³ı¿ÕÏĞ¹ı¾ÃµÄµÄ¶îÍâÁ¬½Ó
+	// åˆ é™¤ç©ºé—²è¿‡ä¹…çš„çš„é¢å¤–è¿æ¥
 	void deleteExcessConnection();
 private:
-	// Á¬½ÓµÄÊı¾İ¿âĞÅÏ¢
+	// è¿æ¥çš„æ•°æ®åº“ä¿¡æ¯
 	std::string ip_;
 	unsigned short port_;
 	std::string user_;
 	std::string password_;
 	std::string database_;
 	//
-	int initConnection_;
-	int maxConnection_;
-	int maxIdleTime_;
-	int connectTimeOut_;	
+	int initConnection_;	// åˆå§‹è¿æ¥é‡
+	int maxConnection_;	// æœ€å¤§è¿æ¥é‡
+	int maxIdleTime_;	// é¢å¤–è¿æ¥çš„æœ€å¤§ç©ºé—²æ—¶é—´
+	int connectTimeOut_;	// ç”¨æˆ·è·å–è¿æ¥æ—¶çš„è¶…æ—¶æ—¶é—´
 	// 
-	static std::atomic_bool isEnd_;
-	std::queue<Connection*> connectionQue_;
-	std::atomic_int connectionNum_;
-	std::mutex mtx_;
+	static std::atomic_bool isEnd_;		// æ ‡å¿—è¿æ¥æ± æ˜¯å¦å…³é—­
+	std::queue<Connection*> connectionQue_; // è¿æ¥éƒ½å­˜å‚¨åœ¨é˜Ÿåˆ—é‡Œ
+	std::atomic_int connectionNum_;		// æ ‡å¿—æ€»å…±åˆ›å»ºäº†å¤šå°‘ä¸ªè¿æ¥
+	std::mutex mtx_;			
 	std::condition_variable cv_;
 
 };
