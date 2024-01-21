@@ -2,7 +2,6 @@
 #include<fstream>
 #include<string>
 #include<ctime>
-#include"connection.h"
 #include"connectionpool.h"
 using std::cout;
 using std::endl;
